@@ -4,6 +4,8 @@ import br.com.aplicativo.filmesmatch.service.ConsultaChatGPT;
 import jakarta.persistence.*;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalDouble;
 
 
@@ -26,6 +28,9 @@ public class Serie {
     private String poster;
     private String sinopse;
 
+    @Transient
+    private List<Episodio> episodios = new ArrayList<>();
+
     public Serie(DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
         this.totalTemporadas = dadosSerie.totalTemporadas();
@@ -46,7 +51,6 @@ public class Serie {
     public String getTitulo() {
         return titulo;
     }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -54,7 +58,6 @@ public class Serie {
     public Integer getTotalTemporadas() {
         return totalTemporadas;
     }
-
     public void setTotalTemporadas(Integer totalTemporadas) {
         this.totalTemporadas = totalTemporadas;
     }
@@ -62,7 +65,6 @@ public class Serie {
     public Double getAvaliacao() {
         return avaliacao;
     }
-
     public void setAvaliacao(Double avaliacao) {
         this.avaliacao = avaliacao;
     }
@@ -70,7 +72,6 @@ public class Serie {
     public Categoria getGenero() {
         return genero;
     }
-
     public void setGenero(Categoria genero) {
         this.genero = genero;
     }
@@ -78,7 +79,6 @@ public class Serie {
     public String getAtores() {
         return atores;
     }
-
     public void setAtores(String atores) {
         this.atores = atores;
     }
@@ -86,7 +86,6 @@ public class Serie {
     public String getPoster() {
         return poster;
     }
-
     public void setPoster(String poster) {
         this.poster = poster;
     }
@@ -94,7 +93,6 @@ public class Serie {
     public String getSinopse() {
         return sinopse;
     }
-
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
     }
@@ -110,5 +108,13 @@ public class Serie {
                         ", atores='" + atores + '\'' +
                         ", poster='" + poster + '\'' +
                         ", sinopse='" + sinopse + '\'';
+    }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        this.episodios = episodios;
     }
 }
