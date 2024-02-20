@@ -3,9 +3,11 @@ package br.com.aplicativo.filmesmatch.principal;
 import br.com.aplicativo.filmesmatch.model.DadosSerie;
 import br.com.aplicativo.filmesmatch.model.DadosTemporada;
 import br.com.aplicativo.filmesmatch.model.Serie;
+import br.com.aplicativo.filmesmatch.repositoy.SerieRepository;
 import br.com.aplicativo.filmesmatch.service.ConsumoApi;
 import br.com.aplicativo.filmesmatch.service.ConverteDados;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -21,6 +23,12 @@ public class Principal {
     private final String ENDERECO =  dotenv.get("ENDERECO");
     private final String API_KEY = "&apikey=" + dotenv.get("API_KEY");
     private List<DadosSerie> dadosSeries = new ArrayList<>();
+    private SerieRepository serieRepository;
+
+
+    public Principal(SerieRepository serieRepository) {
+        this.serieRepository = serieRepository;
+    }
 
     public void exibeMenu() {
         var opcao = -1;
@@ -58,7 +66,9 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
-        dadosSeries.add(dados);
+        Serie serie = new Serie(dados);
+        //dadosSeries.add(dados);
+        serieRepository.save(serie);
         System.out.println(dados);
     }
 
