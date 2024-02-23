@@ -43,6 +43,9 @@ public class Serie {
         this.sinopse =  dadosSerie.sinopse();
     }
 
+    //Construtor obrigatório para o JPA
+    public Serie() {}
+
     public long getId() {
         return id;
     }
