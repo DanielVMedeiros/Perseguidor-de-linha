@@ -1,4 +1,6 @@
 package br.com.aplicativo.filmesmatch.model;
+import lombok.Getter;
+import lombok.Setter;
 
 import jakarta.persistence.*;
 
@@ -10,11 +12,28 @@ import java.time.format.DateTimeParseException;
 public class Episodio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private long id;
+
+    @Getter
+    @Setter
     private Integer temporada;
+
+    @Getter
+    @Setter
     private String titulo;
+
+    @Getter
+    @Setter
     private Integer numeroEpisodio;
+
+    @Getter
+    @Setter
     private Double avaliacao;
+
+    @Getter
+    @Setter
     private LocalDate dataLancamento;
 
     @ManyToOne
@@ -41,62 +60,6 @@ public class Episodio {
     //Construtor obrigatório para o JPA
     public Episodio() {
 
-    }
-
-    public Integer getTemporada() {
-        return temporada;
-    }
-
-    public void setTemporada(Integer temporada) {
-        this.temporada = temporada;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public Integer getNumeroEpisodio() {
-        return numeroEpisodio;
-    }
-
-    public void setNumeroEpisodio(Integer numeroEpisodio) {
-        this.numeroEpisodio = numeroEpisodio;
-    }
-
-    public Double getAvaliacao() {
-        return avaliacao;
-    }
-
-    public void setAvaliacao(Double avaliacao) {
-        this.avaliacao = avaliacao;
-    }
-
-    public LocalDate getDataLancamento() {
-        return dataLancamento;
-    }
-
-    public void setDataLancamento(LocalDate dataLancamento) {
-        this.dataLancamento = dataLancamento;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Serie getSerie() {
-        return serie;
-    }
-
-    public void setSerie(Serie serie) {
-        this.serie = serie;
     }
 
     @Override
