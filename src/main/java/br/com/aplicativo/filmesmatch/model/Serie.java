@@ -33,6 +33,8 @@ public class Serie {
     @Setter
     private Double avaliacao;
 
+    @Getter
+    @Setter
     @Enumerated(EnumType.STRING)
     private Categoria genero;
 
