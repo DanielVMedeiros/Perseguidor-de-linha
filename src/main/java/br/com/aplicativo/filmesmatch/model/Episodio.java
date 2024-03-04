@@ -37,6 +37,8 @@ public class Episodio {
     private LocalDate dataLancamento;
 
     @ManyToOne
+    @Getter
+    @Setter
     private Serie serie;
 
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
