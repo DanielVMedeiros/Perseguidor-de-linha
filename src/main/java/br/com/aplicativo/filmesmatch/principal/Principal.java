@@ -35,6 +35,7 @@ public class Principal {
                     1 - Buscar séries
                     2 - Buscar episódios
                     3 - Listar séries buscadas
+                    4 - Buscar série por título
                                     
                     0 - Sair                                 
                     """;
@@ -53,12 +54,25 @@ public class Principal {
                 case 3:
                     listarSeriesBuscadas();
                     break;
+                case 4:
+                    buscarSeriePorTitulo();
                 case 0:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida");
             }
+        }
+    }
+
+    private void buscarSeriePorTitulo() {
+        System.out.println("Digite o nome da série para busca");
+        var nomeSerie = leitura.nextLine();
+        Optional<Serie> serie = serieRepository.findByTituloContainingIgnoreCase(nomeSerie);
+        if (serie.isPresent()) {
+            System.out.println("Serie:" + serie.get());
+        }else{
+            System.out.println("Serie não está cadastrada");
         }
     }
 
@@ -85,9 +99,7 @@ public class Principal {
         System.out.println("Digite o nome da série de uma das séries acima:");
         var nomeSerie = leitura.nextLine();
 
-        Optional<Serie> serie =  series.stream().filter(s -> s.getTitulo()
-                .equalsIgnoreCase(nomeSerie))
-                .findFirst();
+        Optional<Serie> serie = serieRepository.findByTituloContainingIgnoreCase(nomeSerie);
 
         if(serie.isPresent()){
            List<DadosTemporada> temporadas = new ArrayList<>();
