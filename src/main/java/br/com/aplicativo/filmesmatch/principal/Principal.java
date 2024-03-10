@@ -1,9 +1,6 @@
 package br.com.aplicativo.filmesmatch.principal;
 
-import br.com.aplicativo.filmesmatch.model.DadosSerie;
-import br.com.aplicativo.filmesmatch.model.DadosTemporada;
-import br.com.aplicativo.filmesmatch.model.Episodio;
-import br.com.aplicativo.filmesmatch.model.Serie;
+import br.com.aplicativo.filmesmatch.model.*;
 import br.com.aplicativo.filmesmatch.repositoy.SerieRepository;
 import br.com.aplicativo.filmesmatch.service.ConsumoApi;
 import br.com.aplicativo.filmesmatch.service.ConverteDados;
@@ -37,6 +34,8 @@ public class Principal {
                     3 - Listar séries buscadas
                     4 - Buscar série por título
                     5 - Buscar série por ator
+                    6 - Buscar top 5 melhores séries
+                    7 - Buscar por gênero
                                 
                     0 - Sair                                 
                     """;
@@ -61,6 +60,12 @@ public class Principal {
                 case 5:
                     buscarSeriePorAtor();
                     break;
+                case 6:
+                    buscarMelhoresSeries();
+                    break;
+                case 7:
+                    buscarPorGenero();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -68,6 +73,21 @@ public class Principal {
                     System.out.println("Opção inválida");
             }
         }
+    }
+
+    private void buscarPorGenero() {
+        System.out.println("Digite o nome da gênero");
+        var nomeCategoria = leitura.nextLine();
+        Categoria categoria = Categoria.fromPortugues(nomeCategoria);
+        List<Serie> serieEncontradas = serieRepository.findByGenero(categoria);
+        System.out.println("Séries encontradas na categoria: " + categoria + ":");
+        serieEncontradas.forEach(serie -> System.out.println(serie.getTitulo() + "->" + serie.getAvaliacao()));
+    }
+
+    private void buscarMelhoresSeries() {
+        List<Serie> serieEncontradas = serieRepository.findTop5ByOrderByAvaliacaoDesc();
+        System.out.println("Top 5 melhores séries");
+        serieEncontradas.forEach(serie -> System.out.println(serie.getTitulo() + "->" + serie.getAvaliacao()));
     }
 
     private void buscarSeriePorAtor() {
