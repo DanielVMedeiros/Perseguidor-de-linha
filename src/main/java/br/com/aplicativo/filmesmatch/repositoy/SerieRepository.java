@@ -1,5 +1,6 @@
 package br.com.aplicativo.filmesmatch.repositoy;
 
+import br.com.aplicativo.filmesmatch.model.Categoria;
 import br.com.aplicativo.filmesmatch.model.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,8 @@ public interface SerieRepository extends JpaRepository<Serie, Integer> {
     Optional<Serie> findByTituloContainingIgnoreCase(String titulo);
 
     List<Serie> findByAtoresContainingIgnoreCase(String nomeAtor);
+
+    List<Serie> findTop5ByOrderByAvaliacaoDesc();
+
+    List<Serie> findByGenero(Categoria genero);
 }
