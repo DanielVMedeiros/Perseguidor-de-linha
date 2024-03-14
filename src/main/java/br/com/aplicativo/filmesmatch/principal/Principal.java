@@ -36,6 +36,7 @@ public class Principal {
                     5 - Buscar série por ator
                     6 - Buscar top 5 melhores séries
                     7 - Buscar por gênero
+                    8 - Buscar pela quantidade de temporadas e avaliação
                                 
                     0 - Sair                                 
                     """;
@@ -66,6 +67,9 @@ public class Principal {
                 case 7:
                     buscarPorGenero();
                     break;
+                case 8:
+                    buscarPorTemporadasAvaliacao();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -73,6 +77,17 @@ public class Principal {
                     System.out.println("Opção inválida");
             }
         }
+    }
+
+    private void buscarPorTemporadasAvaliacao() {
+        System.out.println("Digite o máximo de temporadas:");
+        var totalTemporadas = leitura.nextInt();
+        leitura.nextLine();
+        System.out.println("Digite a nota mínima de avaliação");
+        var avaliacao = leitura.nextDouble();
+        List<Serie> seriesEncontradas = serieRepository.findSerieTemporadaAvaliacao(totalTemporadas, avaliacao);
+        System.out.println("Séries encontradas:");
+        seriesEncontradas.forEach(serie -> System.out.println(serie.getTitulo() + " Avaliação:" + serie.getAvaliacao() + " Temporadas:" + serie.getTotalTemporadas()));
     }
 
     private void buscarPorGenero() {
