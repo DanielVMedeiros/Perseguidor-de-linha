@@ -37,7 +37,8 @@ public class Principal {
                     6 - Buscar top 5 melhores séries
                     7 - Buscar por gênero
                     8 - Buscar pela quantidade de temporadas e avaliação
-                                
+                    9 - Buscar Episodio por titulo
+                    
                     0 - Sair                                 
                     """;
 
@@ -70,6 +71,9 @@ public class Principal {
                 case 8:
                     buscarPorTemporadasAvaliacao();
                     break;
+                case 9:
+                    buscarEpisodioTitulo();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -77,6 +81,15 @@ public class Principal {
                     System.out.println("Opção inválida");
             }
         }
+    }
+
+    private void buscarEpisodioTitulo() {
+        System.out.println("Digite o título do episódio:");
+        var titulo = leitura.nextLine();
+        List<Episodio> episodiosEncontrados = serieRepository.findEpisodioPorTitulo(titulo);
+        System.out.println("Episódios encontrados:");
+        episodiosEncontrados.forEach(episodio -> System.out.println(episodio.getSerie().getTitulo() +" Titulo Episódio:" + episodio.getTitulo() +
+                " Avaliação:" + episodio.getAvaliacao() + " Temporada:" + episodio.getTemporada()));
     }
 
     private void buscarPorTemporadasAvaliacao() {
