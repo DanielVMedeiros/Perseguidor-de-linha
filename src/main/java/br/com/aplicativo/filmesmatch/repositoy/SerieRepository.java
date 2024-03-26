@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface SerieRepository extends JpaRepository<Serie, Integer> {
+public interface SerieRepository extends JpaRepository<Serie, Long> {
     Optional<Serie> findByTituloContainingIgnoreCase(String titulo);
 
     List<Serie> findByAtoresContainingIgnoreCase(String nomeAtor);
