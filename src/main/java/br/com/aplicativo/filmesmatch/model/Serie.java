@@ -1,6 +1,5 @@
 package br.com.aplicativo.filmesmatch.model;
 
-import br.com.aplicativo.filmesmatch.service.ConsultaChatGPT;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
