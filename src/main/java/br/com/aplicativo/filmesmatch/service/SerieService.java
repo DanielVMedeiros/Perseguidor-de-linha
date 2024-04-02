@@ -16,17 +16,16 @@ public class SerieService {
     private SerieRepository serieRepository;
 
     public List<SerieDTO> getSeries() {
-        List<SerieDTO> serie = serieRepository.findAll()
-                .stream()
-                .map(s -> new SerieDTO(s.getId(),s.getTitulo(),s.getTotalTemporadas(), s.getAvaliacao(),s.getGenero(),s.getAtores(),s.getPoster(),s.getSinopse()))
-                .collect(Collectors.toList());
-        return serie;
+        return  converteDados(serieRepository.findAll());
     }
 
     public List<SerieDTO> getTopSeries() {
-        List<SerieDTO> serieEncontradas = serieRepository.findTop5ByOrderByAvaliacaoDesc().stream()
+        return  converteDados(serieRepository.findTop5ByOrderByAvaliacaoDesc());
+    }
+
+    private List<SerieDTO> converteDados(List<Serie> series){
+        return series.stream()
                 .map(s -> new SerieDTO(s.getId(),s.getTitulo(),s.getTotalTemporadas(), s.getAvaliacao(),s.getGenero(),s.getAtores(),s.getPoster(),s.getSinopse()))
                 .collect(Collectors.toList());
-        return  serieEncontradas;
     }
 }
