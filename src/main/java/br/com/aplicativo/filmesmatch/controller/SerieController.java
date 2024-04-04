@@ -27,5 +27,9 @@ public class SerieController {
         return serieService.getTopSeries();
     }
 
+    @GetMapping("/lancamentos")
+    public List<SerieDTO> getLancamentos() {
+        return serieService.getEpisodiosRecentes();
+    }
 
 }
