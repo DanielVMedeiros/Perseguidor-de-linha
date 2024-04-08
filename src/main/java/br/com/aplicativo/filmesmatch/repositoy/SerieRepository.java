@@ -1,5 +1,6 @@
 package br.com.aplicativo.filmesmatch.repositoy;
 
+import br.com.aplicativo.filmesmatch.dto.SerieDTO;
 import br.com.aplicativo.filmesmatch.model.Categoria;
 import br.com.aplicativo.filmesmatch.model.Episodio;
 import br.com.aplicativo.filmesmatch.model.Serie;
@@ -32,4 +33,9 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
             "GROUP BY s " +
             "ORDER BY MAX(e.dataLancamento) DESC LIMIT 5")
     List<Serie> findEpisodiosRecentes();
+
+    Optional<Serie> findSerieByid(Long id);
+
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s.id = :id")
+    List<Episodio> findEpisodiosPorSerie(Long id);
 }
